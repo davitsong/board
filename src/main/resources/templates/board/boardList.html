@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.tyhmeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 글목록</title>
+</head>
+<body>
+<div class="container">
+    <h2>[Board List]</h2>
+    <!-- 계시글 목록 출력-->
+    <table border="1">
+
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>글쓴날</th>
+            <th>글쓴이</th>
+            <th>조회수</th>
+        </tr>
+
+        <tr th:each=" board ,status : ${boardList}">
+            <td th:text="${board.boardseq}">번호</td>
+            <td><a href="#"  th:href="@{/board/boardDetail(boardseq=${board.boardseq})}" th:text="${board.title}">제목</a></td>
+            <td th:text="${board.regdate}">글쓴날</td>
+            <td th:text="${board.usrid}">글쓴이</td>
+            <td th:text="${board.hitcount}">조회수</td>
+        </tr>
+
+    </table>
+    <div>
+        <a href="#" th:href="@{/board/boardWrite}">글등록</a> <!--글등록-->
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.tyhmeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div class="container">
+    <h2>[글 자세히 보기]</h2>
+    <p>
+      글 제목:
+    </p>
+    <p th:text="@{board.title}"> 실제 글 제목
+
+    </p>
+    <p>
+      글 내용:
+    </p>
+    <p th:text="@{board.content}"> 실제 글 내용
+
+    </p>
+    <p>
+      첨부파일 :
+    </p>
+    <p th:text="@{board.savedfile}"><a href="#" th:text="${board.savedfile == null} ? '첨부파일 없음' : ''">첨부파일</a>
+
+    </p>
+    <div>
+      <a href="#">삭제</a>&nbsp;
+      <a href="#">수정</a>&nbsp;
+
+    </div>
+
+
+  </div>
+
+</body>
+</html>

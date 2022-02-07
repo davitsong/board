@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- dao 파일의 fullname을 name space에 넣어줌 -->
+
+<mapper namespace="org.smart.board.dao.BoardDao">
+    <select id="findAll" resultType="Board">
+        SELECT * FROM board
+        ORDER BY regdate DESC
+    </select>
+    <insert id="insert" parameterType="Board">
+        INSERt INTO board
+        (boardseq,usrid, title, content)
+        VALUES
+        (board_seq.nextval,#{usrid},#{title},#{content})
+    </insert>
+
+    <select id="findOne" parameterType="Long" resultType="Board">
+        SELECT
+        boardseq, usrid, title, content, hitcount, to_char(regdate,'YYYY--MM--DD') as regdate,
+        originalfile, savedfile
+        FROM board
+        WHERE
+            boardseq=#{boardseq}
+    </select>
+
+    <update id="hitCount" parameterType="Long">
+        UPDATE board
+        SET
+            hitcount = hitcount +1
+        WHERE
+            boardseq = #{boardseq}
+    </update>
+
+</mapper>

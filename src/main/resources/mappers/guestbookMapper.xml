@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- dao 파일의 fullname을 name space에 넣어줌 -->
+<mapper namespace="org.smart.board.dao.GuestbookDao">
+
+    <select id="findAll" resultType="Guestbook">
+        SELECT
+            seq,usrname,usrpwd,text,to_char(regdate,'YYYY--MM--DD') as regdate
+        FROM
+            guestbook
+        ORDER BY seq DESC
+    </select>
+
+    <insert id="insert" parameterType="Guestbook">
+        INSERT INTO guestbook
+        (seq,usrname,usrpwd,text)
+        VALUES
+        (guestbook_seq.nextval,#{usrname},#{usrpwd},#{text})
+    </insert>
+
+    <!-- delete는 result type을 기재하지 않는다-->
+    <delete id="delete" parameterType="map">
+        DELETE guestbook
+        WHERE seq = #{seq} AND usrpwd = #{password}
+    </delete>
+
+</mapper>

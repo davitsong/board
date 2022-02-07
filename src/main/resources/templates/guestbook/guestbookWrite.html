@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.tyhmeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>방명록 글 등록</title>
+    <style>
+        .required{
+            color:red;
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+<body>
+    <div class = "container">
+        <nav>
+            <a href="../index.html" th:href="@{/}">홈으로</a>
+        </nav>
+        <h1>방명록 글쓰기</h1>
+        <form th:action="@{/guestbook/guestbookWrite}" th:method="POST">
+            <label for="usrname">
+                작성자 이름 <span class = "required">*</span>
+
+            </label>
+            <div>
+                <input type="text" id ="usrname" name="usrname" placeholder="이름을 입려해 주세요">
+
+            </div>
+
+
+            <label for="usrpwd">
+            비밀번호 <span class = "required">*</span>
+
+        </label>
+            <div>
+                <input type="password" id ="usrpwd" name="usrpwd" placeholder="이름을 입려해 주세요">
+
+            </div>
+
+            <label for="text">
+                글내용 <span class = "required">*</span>
+
+            </label>
+            <div>
+                <input type="text" id ="text" name="text" placeholder="이름을 입력해 주세요">
+
+            </div>
+
+         <button type="submit">등록</button>
+
+
+        </form>
+
+    </div>
+</body>
+</html>

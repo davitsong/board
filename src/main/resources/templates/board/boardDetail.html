@@ -1,38 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="http://www.tyhmeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+      function delBoard(boardseq) {
+        if(confirm("삭제하시겠습니까?")) {
+          let url = `/board/boardDelete?boardseq=${boardseq}`;
+          location.href = url;
+        }
+      }
+    </script>
 </head>
 <body>
-  <div class="container">
-    <h2>[글 자세히 보기]</h2>
-    <p>
-      글 제목:
-    </p>
-    <p th:text="@{board.title}"> 실제 글 제목
+<div class="container">
+  <h2>[글 자세히 보기]</h2>
+  <p>글제목 : <span th:text="${board.title}">실제 글 제목</span></p>
+  <p>글내용 : <span th:text="${board.content}">실제 글 내용</span></p>
 
-    </p>
-    <p>
-      글 내용:
-    </p>
-    <p th:text="@{board.content}"> 실제 글 내용
-
-    </p>
-    <p>
-      첨부파일 :
-    </p>
-    <p th:text="@{board.savedfile}"><a href="#" th:text="${board.savedfile == null} ? '첨부파일 없음' : ''">첨부파일</a>
-
-    </p>
-    <div>
-      <a href="#">삭제</a>&nbsp;
-      <a href="#">수정</a>&nbsp;
-
-    </div>
-
-
+  <p>첨부파일 :
+  <span>
+    <a th:href="@{/board/download(boardseq=${board.boardseq})}" th:text="${board.originalfile}">첨부파일</a>
+  </span>
+  </p>
+  <div>
+    <a href="javascript:"  th:onclick="|delBoard(${board.boardseq})|">삭제</a>&nbsp;
+    <a href="#" th:href="@{/board/boardUpdate(boardseq=${board.boardseq})}">수정</a>&nbsp;
   </div>
-
+</div>
 </body>
 </html>

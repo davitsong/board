@@ -1,52 +1,38 @@
-<!doctype html>
-<html lang="en" xmlns:th ="http://www.tyhmeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>방명록 목록</title>
     <script th:src="@{/script/guestbook.js}"></script>
 </head>
 <body>
-<div class="container">
-    <h1>방명록</h1>
+    <div class="container">
+        <h1>방명록</h1>
 
-    <table border="1">
-        <tr>
-            <th>
-                일련번호
-            </th>
-            <th>
-                이름
-            </th>
-            <th>
-                내용
-            </th>
-            <th>
-                등록일
-            </th>
-            <th>
-                비고
-            </th>
-        </tr>
-        <tr th:each="guestbook, status : ${guestbookList}">
-            <td th:text="${status.count}">번호</td>
-            <td th:text="${guestbook.usrname}">이름</td>
-            <td th:text="${guestbook.text}">글내용</td>
-            <td th:text="${guestbook.regdate}">등록일</td>
-            <td>
-                <!-- 클라이언트에서seq와 비밀번호를 입력받아서 서버로송신:js-->
-                <a href="#" th:onclick="|delguestbook(${guestbook.seq})|">삭제</a>
-            </td>
-        </tr>
-    </table>
-    <!-- 글 등록 버튼-->
-    <div>
+        <table border="1">
+            <tr>
+                <th>일련번호</th>
+                <th>이름</th>
+                <th>내용</th>
+                <th>등록일</th>
+                <th>비고</th>
+            </tr>
+            <tr th:each="guestbook, status : ${guestbookList}">
+                <td th:text="${status.count}">번호</td>
+                <td th:text="${guestbook.usrname}">글쓴사람 이름</td>
+                <td th:text="${guestbook.text}">글 내용</td>
+                <td th:text="${guestbook.regdate}">등록일</td>
+                <td>
+                    <!-- 클라이언트에서 seq와 비밀번호를 입력받아서 서버로 송신 : Javascript -->
+                    <a href="#" th:onclick="|delguestbook(${guestbook.seq})|">삭제</a>
+                </td>
+            </tr>
+        </table>
 
-        <a href="#" th:href="@{/guestbook/guestbookWrite}">글 등록</a>
+        <!-- 글 등록 버튼 -->
+        <div>
+            <a href="#" th:href="@{/guestbook/guestbookWrite}">글등록</a>
+        </div>
     </div>
-
-</div>
 </body>
 </html>

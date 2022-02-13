@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="http://www.tyhmeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>게시판 글목록</title>
 </head>
 <body>
 <div class="container">
-    <h2>[Board List]</h2>
-    <!-- 계시글 목록 출력-->
-    <table border="1">
 
+    <h2>[게시글 목록]</h2>
+
+    <!-- 검색 기능 --->
+    <form th:action="@{/board/boardList}" method="GET">
+        <select name="searchItem">
+            <option value="title">제목</option>
+            <option value="usrid">글쓴이</option>
+            <option value="content">글내용</option>
+        </select>
+        <input type="text" name="searchWord" th:value="${searchWord}">
+        <input type="submit" value="검색">
+    </form>
+
+    <!-- 게시글 목록 출력 -->
+    <table border="1">
         <tr>
             <th>번호</th>
             <th>제목</th>
@@ -17,19 +29,38 @@
             <th>글쓴이</th>
             <th>조회수</th>
         </tr>
-
-        <tr th:each=" board ,status : ${boardList}">
-            <td th:text="${board.boardseq}">번호</td>
-            <td><a href="#"  th:href="@{/board/boardDetail(boardseq=${board.boardseq})}" th:text="${board.title}">제목</a></td>
-            <td th:text="${board.regdate}">글쓴날</td>
-            <td th:text="${board.usrid}">글쓴이</td>
-            <td th:text="${board.hitcount}">조회수</td>
+        <tr th:each = "board, status : ${boardList}">
+            <td th:text="${board.boardseq}">1</td>
+            <td><a href="#" th:href="@{/board/boardDetail(boardseq=${board.boardseq})}" th:text="${board.title}">제목</a></td>
+            <td th:text="${board.regdate}">2022.2.7</td>
+            <td th:text="${board.usrid}">홍길동</td>
+            <td th:text="${board.hitcount}">0</td>
         </tr>
-
     </table>
+
     <div>
-        <a href="#" th:href="@{/board/boardWrite}">글등록</a> <!--글등록-->
+        <!-- 글을 쓸 수 있는 화면 요청 -->
+        <a href="#" th:href="@{/board/boardWrite}">글등록</a>
     </div>
+
+    <!-- pagination -->
+    <p th:text="${navi}"> </p>
+    <nav>
+        <p>
+            <span>&laquo;</span>
+            <span>&lt;</span>
+
+            1 2 3 4 5
+
+            <span>&gt;</span>
+            <span>&raquo;</span>
+
+        </p>
+    </nav>
+
+
+
 </div>
+
 </body>
 </html>
